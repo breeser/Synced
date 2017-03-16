@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>Sycned</title>
+	  <link rel="stylesheet" href="style.css">
+	  <script src="jquery.min.js"></script>
+	  <script src="linkify.min.js"></script>
+	  <script src="linkify-jquery.min.js"></script>
+	  <script src="linkify-html.min.js"></script>
+  </head>
+  <script src="popup.js"></script>
+  
+  <body style="height:400px; width:700px;">
+		<!-- SYNCED Title & status bars-->
+		<div>
+			<div class="titleStatusLeftGreen titleStatus" data-id="Left">
+			</div>
+			<div class="title">
+				<B>SYNCED</B>	
+			</div>
+			<div class="titleStatusRightGreen titleStatus" data-id="Right">
+			</div>
+		</div>
+
+		<div class="body">
+		<!-- Group List -->
+			<div id="gm" class="groupTab">
+				<div class="header">
+					<B>Group Members</B>
+				</div>
+				<div>
+					<input id="group" class="input" placeholder="Invite User">
+				</div>
+				<div class="boxStyle">
+					<div id="groupMembers" class="scrollbar scrollable">
+					</div>
+				</div>
+				<div>
+					<input class="actionButton" id="leave" type="button" value="Leave Group">
+				</div>
+			</div>
+			
+			<!-- Chat -->
+			<div class="chatTab">
+				<div class="header">
+					<B>Chat</B>
+				</div>
+				<div style="height: 354px;">
+					<div id="chatview" class="chat scrollbar">
+					</div>
+				</div>
+				<div>
+					<input id="chatbox" class="chatInput" placeholder="Say something!">
+				</div>
+			</div>
+			
+			<!-- Friends -->
+			<div id="fl" class="friendsTab">
+				<div class="header">
+					<B>Friends</B>
+				</div>
+				<div>
+					<input id="friend" class="input" placeholder="Add Friend">
+				</div>
+				<div class="boxStyle">
+					<div class="scrollbar scrollable">
+						<div id="OnFriends" class="Online">
+						</div>
+						<div id="OffFriends" class="Offline">
+						</div>
+						<div id="PendFriends" class="Pending">
+						</div>
+					</div>
+				</div>
+				<div>
+					<input class="actionButton" type="button" value="Change Username">
+				</div>
+			</div>
+		</div>
+	
+	<nav id="context-menu" class="context-menu">
+     <ul class="context-menu__items">
+      <li class="context-menu__item friend friend1">
+        <a href="#" class="context-menu__link" data-action="Invite"><i class="fa fa-eye"></i> Invite Friend</a>
+      </li>
+	  <li class="context-menu__item group group1">
+        <a href="#" class="context-menu__link" data-action="Add"><i class="fa fa-eye"></i> Add Friend</a>
+      </li>
+	  <li class="context-menu__item group group2">
+        <a href="#" class="context-menu__link" data-action="Kick"><i class="fa fa-edit"></i> Kick</a>
+      </li>
+      <li class="context-menu__item friend friend2">
+        <a href="#" class="context-menu__link" data-action="Delete"><i class="fa fa-edit"></i> Delete Friend</a>
+      </li>
+     </ul>
+    </nav>
+  </body>
+</html>
