@@ -22,12 +22,14 @@ var GroupsById map[string]Group
 var mutex = &sync.Mutex{}
 var mutex2 = &sync.Mutex{}
 var PendingFR map[string]map[string]string
+var Invites map[string]string
 var empty struct{}
 var fileName = "users.gob"
 
 func init(){
 	ClientsByEmail = make(map[string]*DALClient)
 	ClientsByWs = make(map[*websocket.Conn]*DALClient)
+	Invites = make(map[string]string)
 	//impliment usernames
 	ClientsByUn = make(map[string]*DALClient)
 	GroupsById = make(map[string]Group)
@@ -212,7 +214,9 @@ func ProcessCommand(ws *websocket.Conn, msg string){
 					}
 					if res.Group {
 						if res.Accept {
-							AddToGroup(ws, res.Guid)
+							guid := Invites[res.Guid]
+							delete(Invites, res.Guid)
+							AddToGroup(ws, guid)
 							go GroupInfo(ws)
 						}
 						go NotifyGroup(res,ws)
@@ -488,6 +492,9 @@ func Invite(ws *websocket.Conn, gi GroupInvite){
 		invite := ClientsByEmail[gi.Email]
 		if !IsInGroup(invite.Email, gi.GroupID){
 			if client.ws != nil {
+				id := fmt.Sprintf("%s",uuid.NewV4())
+				Invites[id] = gi.GroupID
+				gi.GroupID = id
 				data, _ := json.Marshal(gi)
 				message := Response{Type:"Invite", Data:string(data)}
 				res, _ := json.Marshal(message)
